@@ -1,5 +1,6 @@
 const cmd = require("@/rl");
-const message = require("./messages");
+const message = require("@/constants/messages");
+// const { playGame } = require("@/games");
 
 const getUserInput = (prompt: string) =>
   new Promise((resolve) => {
@@ -8,20 +9,14 @@ const getUserInput = (prompt: string) =>
     });
   });
 
-const askToStart = async () => {
-  while (true) {
-    const answer = await getUserInput(message.START_OR_END);
-
-    if (answer === "1") console.log("play");
-    if (answer === "9") {
-      console.log(message.END);
-      cmd.close();
-      process.exit(0);
-    }
-    if (answer !== "1" && answer !== "9") console.log(message.INPUT_ERROR);
-  }
+const showEndGame = () => {
+  console.log(message.END);
+  cmd.close();
+  process.exit(0);
 };
 
 module.exports = {
-  askToStart,
+  getUserInput,
+  showEndGame,
+  // askToStart,
 };
