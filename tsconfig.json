@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "CommonJS",
+    "moduleDetection": "force",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "strict": true,
