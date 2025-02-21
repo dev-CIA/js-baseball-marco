@@ -50,6 +50,5 @@ const askToStart = async () => {
 };
 
 module.exports = {
-  playGame,
   askToStart,
 };
