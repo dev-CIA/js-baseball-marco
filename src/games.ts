@@ -1,5 +1,5 @@
 const message = require("@/constants/messages");
-const { getUserInput, showEndGame } = require("@/views/prompt");
+const { getUserInput, showEndGame, printResult } = require("@/views/prompt");
 
 const generateGameNumber = (): string => {
   const numbers: number[] = [];
@@ -23,22 +23,6 @@ const getResult = (input: string, gameNumber: string) => {
   });
 
   return { balls, strikes };
-};
-
-const printResult = (balls: number, strikes: number) => {
-  if (strikes === 3) {
-    console.log(
-      "3스트라이크\n\n3개의 숫자를 모두 맞히셨습니다.\n\n-------게임 종료-------\n\n"
-    );
-
-    return false;
-  }
-
-  if (!balls && !strikes) console.log("낫싱");
-  if (balls && strikes) console.log(`${balls}볼 ${strikes}스트라이크`);
-  if (balls && !strikes) console.log(`${balls}볼`);
-  if (!balls && strikes) console.log(`${strikes}스트라이크`);
-  return true;
 };
 
 const playGame = async () => {
