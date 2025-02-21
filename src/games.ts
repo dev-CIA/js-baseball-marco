@@ -14,7 +14,7 @@ const generateGameNumber = (): string => {
 };
 
 const getResult = (input: string, gameNumber: string) => {
-  let [strikes, balls] = [0, 0];
+  let [balls, strikes] = [0, 0];
   const inputNumbers = input.split("");
 
   inputNumbers.forEach((number, idx) => {
@@ -22,17 +22,36 @@ const getResult = (input: string, gameNumber: string) => {
     if (number !== gameNumber[idx] && gameNumber.includes(number)) balls++;
   });
 
-  return { strikes, balls };
+  return { balls, strikes };
+};
+
+const printResult = (balls: number, strikes: number) => {
+  if (strikes === 3) {
+    console.log(
+      "3스트라이크\n\n3개의 숫자를 모두 맞히셨습니다.\n\n-------게임 종료-------\n\n"
+    );
+
+    return false;
+  }
+
+  if (!balls && !strikes) console.log("낫싱");
+  if (balls && strikes) console.log(`${balls}볼 ${strikes}스트라이크`);
+  if (balls && !strikes) console.log(`${balls}볼`);
+  if (!balls && strikes) console.log(`${strikes}스트라이크`);
+  return true;
 };
 
 const playGame = async () => {
+  let gameStatus = true;
   const gameNumber = generateGameNumber();
 
-  while (true) {
+  while (gameStatus) {
     const userInput = await getUserInput(message.INPUT_NUMBER);
 
     if (userInput === "9") showEndGame();
-    const { strikes, balls } = getResult(userInput, gameNumber);
+    const { balls, strikes } = getResult(userInput, gameNumber);
+
+    gameStatus = printResult(balls, strikes);
   }
 };
 
