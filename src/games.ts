@@ -9,6 +9,7 @@ const generateGameNumber = (): string => {
     if (!numbers.includes(number)) numbers.push(number);
   }
 
+  console.log(message.GENERATE_NUMBER);
   return numbers.join("");
 };
 
