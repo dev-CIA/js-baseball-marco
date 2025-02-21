@@ -25,6 +25,12 @@ const getResult = (input: string, gameNumber: string) => {
   return { balls, strikes };
 };
 
+const isValid = (userInput: string) => {
+  const numbers = new Set(userInput.split(""));
+  if (numbers.size !== 3) return false;
+  return /^[1-9]{3}$/.test(userInput.trim());
+};
+
 const playGame = async () => {
   let gameStatus = true;
   const gameNumber = generateGameNumber();
@@ -33,6 +39,10 @@ const playGame = async () => {
     const userInput = await getUserInput(message.INPUT_NUMBER);
 
     if (userInput === "9") showEndGame();
+    if (!isValid(userInput)) {
+      console.log(message.INPUT_ERROR_3_OTHERS_NUM);
+      continue;
+    }
     const { balls, strikes } = getResult(userInput, gameNumber);
 
     gameStatus = printResult(balls, strikes);
