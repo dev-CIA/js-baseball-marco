@@ -9,8 +9,19 @@ const generateGameNumber = (): string => {
     if (!numbers.includes(number)) numbers.push(number);
   }
 
-  console.log(message.GENERATE_NUMBER);
   return numbers.join("");
+};
+
+const getResult = (input: string, gameNumber: string) => {
+  let [strikes, balls] = [0, 0];
+  const inputNumbers = input.split("");
+
+  inputNumbers.forEach((number, idx) => {
+    if (number === gameNumber[idx]) strikes++;
+    if (number !== gameNumber[idx] && gameNumber.includes(number)) balls++;
+  });
+
+  return { strikes, balls };
 };
 
 const playGame = async () => {
@@ -20,6 +31,7 @@ const playGame = async () => {
     const userInput = await getUserInput(message.INPUT_NUMBER);
 
     if (userInput === "9") showEndGame();
+    const { strikes, balls } = getResult(userInput, gameNumber);
   }
 };
 
