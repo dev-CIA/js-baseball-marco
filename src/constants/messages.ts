@@ -5,7 +5,11 @@ const INPUT_ERROR = "\n잘못된 입력입니다. 다시 입력해주세요.\n";
 const GENERATE_NUMBER = "\n컴퓨터가 숫자를 뽑았습니다.\n";
 
 const INPUT_NUMBER = "숫자를 입력해주세요: ";
-const STRIKE = "3개의 숫자를 모두 맞히셨습니다.\n-------게임 종료-------";
+const THREE_STRIKE =
+  "3스트라이크\n\n3개의 숫자를 모두 맞히셨습니다.\n\n-------게임 종료-------\n\n";
+const NOTHING = "낫싱";
+const BALL = "볼";
+const STRIKE = "스트라이크";
 
 module.exports = {
   START_OR_END,
@@ -13,5 +17,8 @@ module.exports = {
   INPUT_ERROR,
   GENERATE_NUMBER,
   INPUT_NUMBER,
+  THREE_STRIKE,
+  NOTHING,
+  BALL,
   STRIKE,
 };
