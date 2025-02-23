@@ -7,20 +7,20 @@ const INPUT_ERROR_3_OTHERS_NUM =
 const GENERATE_NUMBER = "\n컴퓨터가 숫자를 뽑았습니다.\n";
 
 const INPUT_NUMBER = "숫자를 입력해주세요: ";
-const THREE_STRIKE =
-  "3스트라이크\n\n3개의 숫자를 모두 맞히셨습니다.\n\n-------게임 종료-------\n\n";
+const WIN_GAME =
+  "\n\n3개의 숫자를 모두 맞히셨습니다.\n\n-------게임 종료-------\n\n";
 const NOTHING = "낫싱";
 const BALL = "볼";
 const STRIKE = "스트라이크";
 
-module.exports = {
+export {
   START_OR_END,
   END,
   INPUT_ERROR,
   INPUT_ERROR_3_OTHERS_NUM,
   GENERATE_NUMBER,
   INPUT_NUMBER,
-  THREE_STRIKE,
+  WIN_GAME,
   NOTHING,
   BALL,
   STRIKE,

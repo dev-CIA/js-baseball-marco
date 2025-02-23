@@ -5,5 +5,5 @@
 ```
 npm install
 
-ts-node index
+npm run game
 ```

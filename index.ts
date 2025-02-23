@@ -1,7 +1,7 @@
-const game = require("@/games");
+import { askToStart } from "./src/games.js";
 
 const startGame = () => {
-  game.askToStart();
+  askToStart();
 };
 
 startGame();

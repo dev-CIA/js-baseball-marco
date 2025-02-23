@@ -1,42 +1,44 @@
-const cmd = require("@/rl");
-const message = require("@/constants/messages");
+import { rl } from "../rl.js";
+import * as message from "../constants/messages.js";
 
-const getUserInput = (prompt: string) =>
+const getUserInput = (prompt: string): Promise<string> =>
   new Promise((resolve) => {
-    cmd.question(prompt, (answer: string) => {
+    rl.question(prompt, (answer: string) => {
       resolve(answer.trim());
     });
   });
 
 const showEndGame = () => {
   console.log(message.END);
-  cmd.close();
+  rl.close();
   process.exit(0);
 };
 
 const printResult = (balls: number, strikes: number) => {
-  if (strikes === 3) {
-    console.log(message.THREE_STRIKE);
+  let result = "";
 
-    return false;
+  if (strikes === 3) {
+    result = `3${message.STRIKE}`;
+    console.log(result);
+    console.log(message.WIN_GAME);
+
+    console.log("~~~~~~~~~~result: ", result, typeof result);
+    return { status: false, result, endTime: new Date() };
   }
 
-  if (!balls && !strikes) console.log(message.NOTHING);
+  if (!balls && !strikes) result = message.NOTHING;
 
-  if (balls || strikes) {
-    const result = [
+  if (balls || strikes)
+    result = [
       balls ? `${balls}${message.BALL}` : "",
       strikes ? `${strikes}${message.STRIKE}` : "",
-    ];
+    ]
+      .join(" ")
+      .trim();
 
-    console.log(result.join(" ").trim());
-  }
-
-  return true;
+  console.log(result);
+  console.log("~~~~~~~~~~result: ", result);
+  return { status: true, result };
 };
 
-module.exports = {
-  getUserInput,
-  showEndGame,
-  printResult,
-};
+export { getUserInput, showEndGame, printResult };

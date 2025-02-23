@@ -5,8 +5,10 @@
   "scripts": {
     "start": "npm run lite",
     "test": "jest",
-    "lite": "lite-server"
+    "lite": "lite-server",
+    "game": "node --loader ts-node/esm --no-warnings index.ts"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
