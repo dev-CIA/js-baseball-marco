@@ -22,7 +22,6 @@ const printResult = (balls: number, strikes: number) => {
     console.log(result);
     console.log(message.WIN_GAME);
 
-    console.log("~~~~~~~~~~result: ", result, typeof result);
     return { status: false, result, endTime: new Date() };
   }
 
@@ -37,7 +36,6 @@ const printResult = (balls: number, strikes: number) => {
       .trim();
 
   console.log(result);
-  console.log("~~~~~~~~~~result: ", result);
   return { status: true, result };
 };
 
