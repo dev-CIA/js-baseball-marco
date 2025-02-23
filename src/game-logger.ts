@@ -8,21 +8,20 @@ interface Result {
 }
 
 const logGameProgress = (
+  game: GameResult,
   tryCount: number,
   input?: string,
   gameResult?: Result
 ) => {
-  const game: GameResult = {
-    startTime: new Date(),
-    logs: [],
-    tryCount,
-  };
+  if (!tryCount) {
+    game.startTime = new Date();
+  }
   if (tryCount) {
     game.tryCount++;
     if (input && gameResult)
       game.logs?.push({ input: input, result: gameResult.result });
     if (gameResult?.endTime) {
-      game["endTime"] = gameResult.endTime;
+      game.endTime = gameResult.endTime;
       storeGameResult(game);
     }
   }

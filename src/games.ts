@@ -7,6 +7,7 @@ import {
 } from "./views/prompt.js";
 import { generateGameNumber } from "./util.js";
 import { logGameProgress } from "./game-logger.js";
+import { type GameResult } from "./types/result.js";
 
 const getResult = (input: string, gameNumber: string) => {
   let [balls, strikes] = [0, 0];
@@ -30,8 +31,11 @@ const playGame = async () => {
   let gameStatus = true;
   let tryCount = 0;
   const gameNumber = generateGameNumber();
-
-  logGameProgress(tryCount);
+  const game: GameResult = {
+    logs: [],
+    tryCount: 0,
+  };
+  logGameProgress(game, tryCount);
 
   while (gameStatus) {
     const userInput = await getUserInput(message.INPUT_NUMBER);
@@ -44,7 +48,7 @@ const playGame = async () => {
     const { balls, strikes } = getResult(userInput, gameNumber);
 
     const gameResult = printResult(balls, strikes);
-    logGameProgress(tryCount++, userInput, gameResult);
+    logGameProgress(game, ++tryCount, userInput, gameResult);
 
     gameStatus = gameResult.status;
   }
@@ -55,7 +59,7 @@ const askToStart = async () => {
     const answer = await getUserInput(message.START_OR_END);
 
     if (answer === "1") await playGame();
-    if (answer === "2") printLogs();
+    if (answer === "2") await printLogs();
     if (answer === "9") showEndGame();
     if (answer !== "1" && answer !== "2" && answer !== "9")
       console.log(message.INPUT_ERROR);
