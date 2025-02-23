@@ -1,18 +1,12 @@
 import * as message from "./constants/messages.js";
-import { getUserInput, showEndGame, printResult } from "./views/prompt.js";
+import {
+  getUserInput,
+  showEndGame,
+  printResult,
+  printLogs,
+} from "./views/prompt.js";
+import { generateGameNumber } from "./util.js";
 import { logGameProgress } from "./game-logger.js";
-
-const generateGameNumber = (): string => {
-  const numbers: number[] = [];
-
-  while (numbers.length < 3) {
-    const number = Math.floor(Math.random() * 9) + 1;
-    if (!numbers.includes(number)) numbers.push(number);
-  }
-
-  console.log(message.GENERATE_NUMBER);
-  return numbers.join("");
-};
 
 const getResult = (input: string, gameNumber: string) => {
   let [balls, strikes] = [0, 0];
@@ -61,8 +55,10 @@ const askToStart = async () => {
     const answer = await getUserInput(message.START_OR_END);
 
     if (answer === "1") await playGame();
+    if (answer === "2") printLogs();
     if (answer === "9") showEndGame();
-    if (answer !== "1" && answer !== "9") console.log(message.INPUT_ERROR);
+    if (answer !== "1" && answer !== "2" && answer !== "9")
+      console.log(message.INPUT_ERROR);
   }
 };
 
