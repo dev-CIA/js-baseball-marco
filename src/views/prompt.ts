@@ -1,7 +1,7 @@
 import { rl } from "../rl.js";
 import * as message from "../constants/messages.js";
 import { gameResults } from "../data.js";
-import { formatDateOptions } from "../util.js";
+import { formatDateOptions } from "../constants/date.js";
 import { GameResult } from "@/types/result.js";
 
 const getUserInput = (prompt: string): Promise<string> =>
