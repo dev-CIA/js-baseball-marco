@@ -1,5 +1,6 @@
-const message = require("@/constants/messages");
-const { getUserInput, showEndGame, printResult } = require("@/views/prompt");
+import * as message from "./constants/messages.js";
+import { getUserInput, showEndGame, printResult } from "./views/prompt.js";
+import { logGameProgress } from "./game-logger.js";
 
 const generateGameNumber = (): string => {
   const numbers: number[] = [];
@@ -33,7 +34,10 @@ const isValid = (userInput: string) => {
 
 const playGame = async () => {
   let gameStatus = true;
+  let tryCount = 0;
   const gameNumber = generateGameNumber();
+
+  logGameProgress(tryCount);
 
   while (gameStatus) {
     const userInput = await getUserInput(message.INPUT_NUMBER);
@@ -45,7 +49,10 @@ const playGame = async () => {
     }
     const { balls, strikes } = getResult(userInput, gameNumber);
 
-    gameStatus = printResult(balls, strikes);
+    const gameResult = printResult(balls, strikes);
+    logGameProgress(tryCount++, userInput, gameResult);
+
+    gameStatus = gameResult.status;
   }
 };
 
@@ -59,6 +66,4 @@ const askToStart = async () => {
   }
 };
 
-module.exports = {
-  askToStart,
-};
+export { askToStart };
